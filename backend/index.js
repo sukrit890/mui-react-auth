@@ -24,9 +24,10 @@ mongoose.connect(process.env.MONGODB_URI, {
     process.exit(1); // Exit the process or handle the error accordingly
 });
 
-app.get('/ping', (req, res) => {
+app.get('/ping', (_req, res) => {
     res.send('Pong!');
-  });
+    console.log('pong')
+});
 
 app.post('/register', (req, res)=>{
     // To post / insert data into database
@@ -44,7 +45,7 @@ app.post('/register', (req, res)=>{
         }
     })
     
-});
+})
 
 app.post('/login', (req, res)=>{
     // To find record from the database
@@ -65,7 +66,7 @@ app.post('/login', (req, res)=>{
             res.json("No records found! ");
         }
     })
-});
+})
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {

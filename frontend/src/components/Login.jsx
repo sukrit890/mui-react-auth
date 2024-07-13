@@ -11,7 +11,7 @@ const Login = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         
-        axios.post('https://mui-react-auth.vercel.app/', { email, password })
+        axios.post('https://mui-react-auth.vercel.app', { email, password })
         .then(result => {
             console.log(result);
             if (result.data === "Success") {

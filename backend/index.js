@@ -1,8 +1,6 @@
-require('dotenv').config();
 const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
-
 const FormDataModel = require ('./models/FormData');
 
 
@@ -10,24 +8,23 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-if (!process.env.MONGODB_URI) {
-    console.error("MongoDB URI is not defined in .env file");
-    process.exit(1); // Exit the process or handle the error accordingly
-}
-mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+mongoose.connect("mongodb+srv://sukritp2004:bobo@cluster0.bd48bly.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
+
+const db=mongoose.connection;
+db.on('error', (err)=>{
+    console.error("Database connection failed",err)
 })
-.then(() => console.log("Database connection established successfully"))
-.catch(err => {
-    console.error("Database connection failed:", err.message);
-    process.exit(1); // Exit the process or handle the error accordingly
-});
+db.once('open', ()=>{
+    console.log("Database connection established successfully")
+})
+
 
 app.get('/ping', (_req, res) => {
     res.send('Pong!');
-    console.log('pong')
-});
+    console.log('pong');
+  });
+
+
 
 app.post('/register', (req, res)=>{
     // To post / insert data into database
@@ -68,7 +65,9 @@ app.post('/login', (req, res)=>{
     })
 })
 
-const port = process.env.PORT || 3001;
-app.listen(port, () => {
-    console.log(`Server listening on http://localhost:${port}/`);
+app.listen(3001, () => {
+  
+    console.log("Server listining on http://localhost:3001/");
+    
+
 });

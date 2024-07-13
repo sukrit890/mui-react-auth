@@ -67,7 +67,7 @@ app.post('/login', (req, res)=>{
 
 app.listen(3001, () => {
   
-    console.log("Server listining on http://localhost:3001/");
+    console.log("Server listining on https://mui-react-auth.vercel.app/");
     
 
 });
